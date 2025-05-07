@@ -11,6 +11,7 @@ contextBridge.exposeInMainWorld('electronAPI', {
   openExternal: (url) => shell.openExternal(url),
   loadFont: (fontPath) => {
     const buffer = fs.readFileSync(fontPath);
-    return buffer.buffer;
+    const uint8Array = new Uint8Array(buffer);
+    return uint8Array;
   }
 });
