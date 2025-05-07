@@ -16,14 +16,23 @@ class ItemFactory {
   }
 
   async load_font(buffer, name, item) {
-    const blob = new Blob([buffer], { type: 'font/ttf' });
-    const blobUrl = URL.createObjectURL(blob);
-    const sanitized_name = name.replace(/[^a-zA-Z0-9]/g, '');
-    const fontFace = new FontFace(sanitized_name, `url("${blobUrl}")`);
+    try {
+      const blob = new Blob([buffer], { type: 'font/ttf' });
+      const blobUrl = URL.createObjectURL(blob);
+      const sanitized_name = name.replace(/[^a-zA-Z0-9]/g, '');
 
-    await fontFace.load();
-    document.fonts.add(fontFace);
-    item.querySelector('.file-item__name').style.fontFamily = sanitized_name;
+      const fontFace = new FontFace(sanitized_name, `url("${blobUrl}")`);
+
+      await fontFace.load();
+      document.fonts.add(fontFace);
+
+      item.querySelector('.file-item__name').style.fontFamily = sanitized_name;
+      // console.log(`✅ Loaded font: ${name}`);
+    } catch (error) {
+      console.error(`❌ Error loading font: ${name}`, error);
+      item.classList.add('font-load-error');
+      item.querySelector('.file-item__name').textContent += ' (❌ probably corrupted)';
+    }
   }
 }
 
