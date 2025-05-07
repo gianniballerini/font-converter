@@ -1,2 +1,16 @@
 // src/preload/preload.js
-// Add contextBridge if needed
+const { contextBridge, ipcRenderer, shell } = require('electron');
+const fs = require('fs');
+
+contextBridge.exposeInMainWorld('electronAPI', {
+  compressFonts: (filePaths) => ipcRenderer.invoke('compress-fonts', filePaths),
+  compressFontsToFolder: (filePaths) => ipcRenderer.invoke('compress-fonts-to-folder', filePaths),
+  compressFontsAndZip: (filePaths) => ipcRenderer.invoke('compress-fonts-and-zip', filePaths),
+  selectFiles: () => ipcRenderer.invoke('dialog:openFiles'),
+  selectFolder: () => ipcRenderer.invoke('dialog:select-folder'),
+  openExternal: (url) => shell.openExternal(url),
+  loadFont: (fontPath) => {
+    const buffer = fs.readFileSync(fontPath);
+    return buffer.buffer;
+  }
+});

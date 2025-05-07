@@ -1,0 +1,26 @@
+.file-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10 * $ptr;
+    border-radius: 10 * $ptr;
+    border: 1 * $ptr solid transparent;
+
+    &:hover {
+      border-left: 1 * $ptr solid $paletteA-0;
+      border-right: 1 * $ptr solid $paletteA-0;
+    }
+  }
+
+  .file-item__name {
+    font-size: 16 * $ptr;
+    font-weight: 600;
+  }
+
+  .file-item__actions {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }

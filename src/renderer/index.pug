@@ -1,16 +1,12 @@
 doctype html
 html(lang="en")
-  head
-    meta(charset="UTF-8")
-    meta(name="viewport" content="width=device-width, initial-scale=1.0")
-    title= package.name
-    link(rel="stylesheet" href="./style.scss")
-  body
-    div.container
-      h1 Font Converter
-      div.drop-zone
-        p Drag and drop TTF files here
-        p or
-        button#select-files Select Files
-      div#file-list
-    script(type="module" src="./renderer.js")
+	head
+		meta(charset="UTF-8")
+		meta(name="viewport" content="width=device-width, initial-scale=1.0")
+		title= package.name
+		link(rel="stylesheet" href="./styles/styles.scss")
+
+	body
+		include views/home.pug
+		include views/_file_item_template.pug
+		script(type="module" src="./renderer.js")

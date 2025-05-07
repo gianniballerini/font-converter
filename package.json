@@ -6,7 +6,9 @@
   "author": "Gianni Ballerini <gianniballerini@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "electron": "^36.1.0"
+    "archiver": "^7.0.1",
+    "electron": "^36.1.0",
+    "woff2-encoder": "^2.0.0"
   },
   "devDependencies": {
     "concurrently": "^9.1.2",
@@ -20,6 +22,7 @@
   "scripts": {
     "dev": "concurrently -k \"vite\" \"wait-on http://localhost:1234 && cross-env VITE_DEV_SERVER_URL=http://localhost:1234 electron .\"",
     "build": "vite build",
+    "start-vite": "vite --host --port 1234",
     "start": "electron ."
   }
 }

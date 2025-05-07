@@ -1,0 +1,50 @@
+.footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    column-gap: 10 * $ptr;
+    font-family: $bytesize-font;
+}
+
+.footer-link {
+    display: flex;
+    align-items: center;
+    column-gap: 10 * $ptr;
+    width: fit-content;
+
+
+    svg {
+        width: 24 * $ptr;
+        height: 24 * $ptr;
+        color: $paletteA-3;
+    }
+
+    &:hover {
+        .footer-link-text {
+            transform: scale(1);
+        }
+    }
+
+    &--left {
+        justify-content: flex-start;
+    }
+
+    &--right {
+        justify-content: flex-end;
+    }
+}
+
+.footer-link-text {
+    transition: transform 0.3s ease-in-out;
+    transform: scale(0);
+    margin-bottom: 10 * $ptr;
+
+    &--left {
+        transform-origin: left;
+    }
+
+    &--right {
+        transform-origin: right;
+    }
+}

@@ -1,0 +1,74 @@
+.dropzone {
+  display: flex;
+  flex-direction: row;
+  column-gap: 10 * $ptr;
+  align-items: center;
+  justify-content: space-around;
+  border: 2 * $ptr solid $paletteA-3;
+  padding: 10 * $ptr;
+  height: 100%;
+  width: 100%;
+  border-radius: 10 * $ptr;
+
+}
+
+  .dropzone__files, .dropzone__folder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    border-radius: 10 * $ptr;
+    transition: background 0.2s ease;
+    &:hover {
+      background: $paletteA-1;
+      color: $paletteA-5;
+    }
+  }
+
+  .dropzone__folder {
+    transition: background 0.2s ease;
+    &:hover {
+      background: $paletteA-1;
+      color: $paletteA-5;
+    }
+  }
+
+  .dropzone__text {
+    font-size: 20 * $ptr;
+    text-align: center;
+  }
+
+  .dropzone-list-container {
+    display: flex;
+    flex-direction: column;
+    row-gap: 3 * $ptr;
+    height: 100%;
+    width: 100%;
+    border: 2 * $ptr solid $paletteA-3;
+    border-radius: 10 * $ptr;
+    padding: 2rem;
+    background: $paletteA-4;
+    color: $paletteA-6;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    &::-webkit-scrollbar {
+      width: 5 * $ptr;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: $paletteA-3;
+    }
+  }
+
+  .dropzone-buttons-container {
+    display: flex;
+    flex-direction: row;
+    column-gap: 10 * $ptr;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+

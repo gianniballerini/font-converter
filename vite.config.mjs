@@ -5,11 +5,11 @@ import packagejson from './package.json';
 
 export default {
   root: 'src/renderer',
-  base: './',
   build: {
     outDir: path.resolve(__dirname, 'dist'),
     emptyOutDir: true,
   },
+  publicDir: path.resolve(__dirname, 'public'),
   server: {
     port: 1234,
     strictPort: true,

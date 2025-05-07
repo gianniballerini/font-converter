@@ -1,0 +1,33 @@
+
+.home {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 100vh;
+    width: 100vw;
+    padding: 20 * $ptr;
+    row-gap: 10 * $ptr;
+}
+
+  .home-title {
+    font-family: $bytesize-font;
+    font-size: 42 * $ptr;
+  }
+
+  .home-subtitle {
+    font-size: 16 * $ptr;
+    font-style: italic;
+  }
+
+  .home-faq {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 30 * $ptr;
+    height: 30 * $ptr;
+    margin-top: 30 * $ptr;
+    margin-right: 20 * $ptr;
+    object-fit: cover;
+  }
