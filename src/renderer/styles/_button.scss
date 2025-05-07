@@ -5,36 +5,16 @@
 
     &--primary {
         color: $paletteA-0;
-        background-color: $paletteA-5;
         border: 1 * $ptr solid $paletteA-0;
-
         border-radius: 10 * $ptr;
         padding: 10 * $ptr;
         text-align: center;
-        transition: background-color 0.2s ease-out;
+        transition: box-shadow 0.2s ease-out, transform 0.2s ease-out;
 
         &:hover {
-            background-color: $paletteA-1;
-            border: 1 * $ptr solid $paletteA-6;
-            color: $paletteA-6;
-            transition: background-color 0.2s ease-out;
-        }
-    }
-
-    &--secondary {
-        color: $paletteA-6;
-        // background-color: $paletteA-3;
-        border: 1 * $ptr solid $paletteA-6;
-        border-radius: 10 * $ptr;
-        padding: 10 * $ptr;
-        text-align: center;
-        transition: background-color 0.5s ease-out scale 0.5s ease-out;
-
-        &:hover {
-            background-color: $paletteA-5;
-            border: 1 * $ptr solid $paletteA-0;
-            color: $paletteA-0;
-            transition: background-color 0.2s ease-out scale 0.2s ease-out;
+            box-shadow: 0 0 5 * $ptr 0 rgba(0, 0, 0, 0.2);
+            transform: scale(1.02);
+            transition: box-shadow 0.2s ease-out, transform 0.2s ease-out;
         }
     }
 

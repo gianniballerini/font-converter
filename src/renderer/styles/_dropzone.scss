@@ -72,3 +72,20 @@
     width: 100%;
   }
 
+  .dropzone-bottom-container {
+    display: flex;
+    flex-direction: row;
+    column-gap: 10 * $ptr;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .dropzone-convert-button {
+    width: 100%;
+  }
+
+  .dropzone-reset-button {
+    width: fit-content;
+  }
+

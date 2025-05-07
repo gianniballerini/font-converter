@@ -4,8 +4,11 @@ import { Settings } from "./Settings";
 class DropZone {
   constructor() {
     this.dropzone = document.querySelector('.dropzone');
-    this.convert_button = document.querySelector('.dropzone-button');
+    this.convert_button = document.querySelector('.dropzone-convert-button');
+    this.reset_button = document.querySelector('.dropzone-reset-button');
+    this.bottom_container = document.querySelector('.dropzone-bottom-container');
     this.list_container = document.querySelector('.dropzone-list-container');
+    this.buttons_container = document.querySelector('.dropzone-buttons-container');
     this.files = [];
 
     this.item_factory = new ItemFactory();
@@ -13,6 +16,7 @@ class DropZone {
 
   init() {
     this.convert_button.addEventListener('click', this.handle_convert_click.bind(this));
+    this.reset_button.addEventListener('click', this.handle_reset_click.bind(this));
   }
 
   async handle_select_files_click() {
@@ -21,8 +25,9 @@ class DropZone {
     if (files.length > 0) {
       this.dropzone.classList.add('hidden');
 
+      this.buttons_container.classList.remove('hidden');
       this.list_container.classList.remove('hidden');
-      this.convert_button.classList.remove('hidden');
+      this.bottom_container.classList.remove('hidden');
 
       for( let i = 0; i < files.length; i++ ) {
         const path = files[i];
@@ -37,8 +42,9 @@ class DropZone {
     if (files.length > 0) {
       this.dropzone.classList.add('hidden');
 
+      this.buttons_container.classList.remove('hidden');
       this.list_container.classList.remove('hidden');
-      this.convert_button.classList.remove('hidden');
+      this.bottom_container.classList.remove('hidden');
 
       for( let i = 0; i < files.length; i++ ) {
         if (files[i].toLowerCase().endsWith('.ttf')) {
@@ -76,7 +82,8 @@ class DropZone {
     if (this.files.length === 0) {
       this.dropzone.classList.remove('hidden');
       this.list_container.classList.add('hidden');
-      this.convert_button.classList.add('hidden');
+      this.bottom_container.classList.add('hidden');
+      this.buttons_container.classList.add('hidden');
     }
   }
 
@@ -95,6 +102,15 @@ class DropZone {
         console.log(response);
         break;
     }
+  }
+
+  handle_reset_click() {
+    this.files = [];
+    this.list_container.innerHTML = '';
+    this.list_container.classList.add('hidden');
+    this.bottom_container.classList.add('hidden');
+    this.buttons_container.classList.add('hidden');
+    this.dropzone.classList.remove('hidden');
   }
 }
 
