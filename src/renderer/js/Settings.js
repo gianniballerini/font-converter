@@ -1,7 +1,7 @@
 class Settings {
   constructor() {
     this.output_dir = null;
-    this.output_format = null;
+    this.output_format = 'default';
     this.font_names = [];
   }
 }

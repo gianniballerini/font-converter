@@ -12,15 +12,15 @@
     align-items: center;
     column-gap: 10 * $ptr;
     width: fit-content;
-
+    color: $paletteA-3;
 
     svg {
         width: 24 * $ptr;
         height: 24 * $ptr;
-        color: $paletteA-3;
     }
 
     &:hover {
+        color: $paletteA-0;
         .footer-link-text {
             transform: scale(1);
         }

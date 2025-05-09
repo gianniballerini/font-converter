@@ -105,18 +105,36 @@ app.whenReady().then(() => {
       filters: [{ name: 'ZIP Archive', extensions: ['zip'] }]
     });
 
-    const convertedFiles = await Promise.all(filePaths.map(async (filePath) => {
-      const fontBuffer = fs.readFileSync(filePath);
-      const compressedBuffer = await compress(fontBuffer);
+    const convertedFiles = [];
+    const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'converted-fonts-'));
+    for (const filePath of filePaths) {
+      try {
+        const fontBuffer = fs.readFileSync(filePath);
+        const compressedBuffer = await compress(fontBuffer);
 
-      const newFileName = path.basename(filePath, path.extname(filePath)) + '.woff2';
-      const newFilePath = path.join(outputDir, newFileName);
-      fs.writeFileSync(newFilePath, compressedBuffer);
+        const newFileName = path.basename(filePath, path.extname(filePath)) + '.woff2';
+        const newFilePath = path.join(tempDir, newFileName);
+        fs.writeFileSync(newFilePath, compressedBuffer);
 
-      return newFilePath;
-    }));
+        convertedFiles.push(newFilePath);
+      } catch (err) {
+        console.error(`Failed to compress font: ${filePath}`, err);
+      }
+    }
+
+    // const convertedFiles = await Promise.all(filePaths.map(async (filePath) => {
+    //   const fontBuffer = fs.readFileSync(filePath);
+    //   const compressedBuffer = await compress(fontBuffer);
+
+    //   const newFileName = path.basename(filePath, path.extname(filePath)) + '.woff2';
+    //   const newFilePath = path.join(outputDir, newFileName);
+    //   fs.writeFileSync(newFilePath, compressedBuffer);
+
+    //   return newFilePath;
+    // }));
 
     const zipPath = await zip_files(convertedFiles);
+    fs.rmdirSync(tempDir, { recursive: true });
 
     return zipPath;
   });

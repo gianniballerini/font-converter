@@ -1,4 +1,5 @@
 import DropZone from "./DropZone";
+import { Preferences } from "./Preferences";
 import { RenderLoop } from "./RenderLoop";
 import { Settings } from "./Settings";
 
@@ -12,12 +13,14 @@ class MainApplication {
 
     this.dropzone = new DropZone();
     this.render_loop = new RenderLoop(this);
+    this.preferences = new Preferences();
   }
 
   init() {
     this.dropzone.init();
     this.load_app_fonts();
     this.render_loop.start();
+    this.preferences.init();
   }
 
   handle_github_link_click() {

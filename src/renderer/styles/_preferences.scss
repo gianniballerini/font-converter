@@ -1,0 +1,112 @@
+.preferences__open-button, .preferences__close-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 100;
+
+    margin: 20 * $ptr;
+
+    width: 32 * $ptr;
+    height: 32 * $ptr;
+
+    svg {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.preferences__open-button {
+    &:hover {
+        color: $paletteA-0;
+    }
+}
+
+.preferences__close-button {
+    transition: transform 0.3s ease-in-out;
+    &:hover {
+        color: $paletteA-0;
+        transform: rotate(90deg);
+    }
+}
+
+.preferences {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    padding: 10 * $ptr;
+
+    background-color: $paletteA-6;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    row-gap: 20 * $ptr;
+
+    transition: transform 0.3s ease-in-out;
+
+    &.closed {
+        transform: translateY(-100%);
+        border-radius: 0 0 0 50 * $ptr;
+    }
+}
+
+    .preferences__title {
+        font-size: 42 * $ptr;
+        color: $paletteA-0;
+
+        font-family: $bytesize-font;
+    }
+
+    .preferences__content {
+        height: 100%;
+        width: 100%;
+        padding: 20 * $ptr;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .preferences__item {
+        display: flex;
+        flex-direction: column;
+        row-gap: 20 * $ptr;
+    }
+
+    .preferences__item-title {
+        font-size: 20 * $ptr;
+        color: $paletteA-0;
+        font-style: italic;
+    }
+
+    .preferences__item-options {
+        display: flex;
+        justify-content: space-around;
+        flex-direction: row;
+        column-gap: 10 * $ptr;
+    }
+
+    .preferences__item-option {
+        font-size: 16 * $ptr;
+        color: $paletteA-0;
+        width: fit-content;
+
+        border: 1 * $ptr solid $paletteA-0;
+        border-radius: 20 * $ptr;
+        padding: 5 * $ptr 15 * $ptr;
+
+        &:hover {
+            background-color: $paletteA-0;
+            color: $paletteA-6;
+        }
+
+        &.selected {
+            background-color: $paletteA-0;
+            color: $paletteA-6;
+        }
+    }
+
