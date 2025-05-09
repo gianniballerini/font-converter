@@ -5,7 +5,7 @@ class Settings {
     this.font_names = [];
     this.theme = 'default';
     this.theme_options = ['default', 'green', 'olive', 'marine', 'pink', 'blue'];
-    this.sanitize = false;
+    this.sanitize = 'false';
   }
 
   init() {
@@ -16,7 +16,7 @@ class Settings {
       this.output_format = local_storage_settings.output_format || 'default'
       this.font_names = local_storage_settings.font_names
       this.theme = local_storage_settings.theme || 'default'
-      this.sanitize = local_storage_settings.sanitize || false
+      this.sanitize = local_storage_settings.sanitize || 'false'
     } else {
       this.save()
     }

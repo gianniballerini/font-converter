@@ -9,6 +9,10 @@ class Preferences {
         // Preferences items
         this.$output_format_options = document.querySelector('.preferences__output-format-options');
         this.$theme_options = document.querySelector('.preferences__theme-options');
+
+        this.$sanitize_options = document.querySelector('.preferences__sanitize-options');
+        this.$sanitize_info = document.querySelector('.preferences__sanitize-info');
+        this.$sanitize_info_icon = document.querySelector('.preferences__sanitize-info-icon');
     }
 
     init() {
@@ -25,6 +29,15 @@ class Preferences {
             const $option = this.$theme_options.children[i];
             $option.addEventListener('click', this.update_theme.bind(this, $option.dataset.option));
         }
+
+        this.update_sanitize(Settings.sanitize);
+        for (let i = 0; i < this.$sanitize_options.children.length; i++) {
+            const $option = this.$sanitize_options.children[i];
+            $option.addEventListener('click', this.update_sanitize.bind(this, $option.dataset.option));
+        }
+
+        this.$sanitize_info_icon.addEventListener('mouseenter', this.open_sanitize_info.bind(this));
+        this.$sanitize_info_icon.addEventListener('mouseleave', this.close_sanitize_info.bind(this));
     }
 
     open() {
@@ -61,6 +74,25 @@ class Preferences {
             }
         }
         this.$theme_options.querySelector(`[data-option="${option}"]`).classList.add('selected');
+    }
+
+    update_sanitize(option) {
+        Settings.update('sanitize', option);
+        for (let i = 0; i < this.$sanitize_options.children.length; i++) {
+            const option = this.$sanitize_options.children[i];
+            if (option.dataset.option !== option) {
+                option.classList.remove('selected');
+            }
+        }
+        this.$sanitize_options.querySelector(`[data-option="${option}"]`).classList.add('selected');
+    }
+
+    open_sanitize_info() {
+        this.$sanitize_info.classList.remove('closed');
+    }
+
+    close_sanitize_info() {
+        this.$sanitize_info.classList.add('closed');
     }
 }
 

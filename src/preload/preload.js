@@ -3,8 +3,8 @@ const { contextBridge, ipcRenderer, shell } = require('electron');
 const fs = require('fs');
 
 contextBridge.exposeInMainWorld('electronAPI', {
-  compressFonts: (filePaths) => ipcRenderer.invoke('compress-fonts', filePaths),
-  compressFontsToFolder: (filePaths) => ipcRenderer.invoke('compress-fonts-to-folder', filePaths),
+  compressFonts: (filePaths, sanitize) => ipcRenderer.invoke('compress-fonts', filePaths, sanitize),
+  compressFontsToFolder: (filePaths, sanitize) => ipcRenderer.invoke('compress-fonts-to-folder', filePaths, sanitize),
   compressFontsAndZip: (filePaths, sanitize) => ipcRenderer.invoke('compress-fonts-and-zip', filePaths, sanitize),
   selectFiles: () => ipcRenderer.invoke('dialog:openFiles'),
   selectFolder: () => ipcRenderer.invoke('dialog:select-folder'),

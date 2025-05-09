@@ -22,7 +22,9 @@ class FontHandler {
       try {
         const compressed_buffer = await this.compress_font(file_path);
 
-        const file_name = sanitize ? this.normalize_font_name(path.basename(file_path)) : path.basename(file_path, path.extname(file_path));
+        console.log(sanitize);
+
+        const file_name = sanitize === 'true' ? this.normalize_font_name(path.basename(file_path)) : path.basename(file_path, path.extname(file_path));
         const new_file_name = file_name + '.woff2';
         const new_file_path = path.join(temp_dir, new_file_name);
         fs.writeFileSync(new_file_path, compressed_buffer);
@@ -86,7 +88,7 @@ class FontHandler {
       .replace(/\.[^/.]+$/, '')         // remove extension
       .replace(/[^a-zA-Z0-9\s]/g, '')    // keep only letters, numbers and spaces
       .replace(/([a-z])([A-Z])/g, '$1-$2') // handle camel/PascalCase
-      .replace(/\s+/g, '-')             // replace spaces
+      .replace(/\s+/g, '_')             // replace spaces
       .toLowerCase();
   }
 
