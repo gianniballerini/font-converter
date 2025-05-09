@@ -85,9 +85,9 @@
 
     .preferences__item-options {
         display: flex;
+        flex-wrap: wrap;
+        gap: 10 * $ptr;
         justify-content: space-around;
-        flex-direction: row;
-        column-gap: 10 * $ptr;
     }
 
     .preferences__item-option {

@@ -6,6 +6,7 @@
     padding: 10 * $ptr;
     border-radius: 10 * $ptr;
     border: 1 * $ptr solid transparent;
+    color: var(--color-6);
 
     &:hover {
       border-left: 1 * $ptr solid var(--color-0);

@@ -4,7 +4,7 @@ class Settings {
     this.output_format = 'default';
     this.font_names = [];
     this.theme = 'default';
-    this.theme_options = ['default', 'green', 'olive', 'marine', 'cherry'];
+    this.theme_options = ['default', 'green', 'olive', 'marine', 'pink', 'blue'];
   }
 
   init() {

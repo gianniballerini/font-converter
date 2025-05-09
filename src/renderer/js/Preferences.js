@@ -14,18 +14,16 @@ class Preferences {
     init() {
         this.$open_button.addEventListener('click', this.open.bind(this));
         this.$close_button.addEventListener('click', this.close.bind(this));
-        this.$output_format_options.querySelector(`[data-option="${Settings.output_format}"]`).classList.add('selected');
+
+        this.update_output_format(Settings.output_format);
         for (let i = 0; i < this.$output_format_options.children.length; i++) {
             const option = this.$output_format_options.children[i];
             option.addEventListener('click', this.update_output_format.bind(this, option.dataset.option));
         }
-        this.$theme_options.querySelector(`[data-option="${Settings.theme}"]`).classList.add('selected');
+        this.update_theme(Settings.theme);
         for (let i = 0; i < this.$theme_options.children.length; i++) {
             const option = this.$theme_options.children[i];
             option.addEventListener('click', this.update_theme.bind(this, option.dataset.option));
-        }
-        if (Settings.theme) {
-            document.body.classList.add('theme-' + Settings.theme);
         }
     }
 
@@ -53,8 +51,6 @@ class Preferences {
     }
 
     update_theme(option) {
-        if (Settings.theme)
-        document.body.classList.remove('theme-' + Settings.theme);
         Settings.update('theme', option);
         document.body.classList.add('theme-' + option);
         for (let i = 0; i < this.$theme_options.children.length; i++) {
