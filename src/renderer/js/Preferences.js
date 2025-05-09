@@ -17,13 +17,13 @@ class Preferences {
 
         this.update_output_format(Settings.output_format);
         for (let i = 0; i < this.$output_format_options.children.length; i++) {
-            const option = this.$output_format_options.children[i];
-            option.addEventListener('click', this.update_output_format.bind(this, option.dataset.option));
+            const $option = this.$output_format_options.children[i];
+            $option.addEventListener('click', this.update_output_format.bind(this, $option.dataset.option));
         }
         this.update_theme(Settings.theme);
         for (let i = 0; i < this.$theme_options.children.length; i++) {
-            const option = this.$theme_options.children[i];
-            option.addEventListener('click', this.update_theme.bind(this, option.dataset.option));
+            const $option = this.$theme_options.children[i];
+            $option.addEventListener('click', this.update_theme.bind(this, $option.dataset.option));
         }
     }
 
@@ -51,6 +51,7 @@ class Preferences {
     }
 
     update_theme(option) {
+        document.body.classList.remove('theme-' + Settings.theme);
         Settings.update('theme', option);
         document.body.classList.add('theme-' + option);
         for (let i = 0; i < this.$theme_options.children.length; i++) {
