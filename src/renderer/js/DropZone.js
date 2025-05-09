@@ -109,17 +109,17 @@ class DropZone {
       case 'zip':
         const path_to_zip = await window.electronAPI.compressFontsAndZip(this.files);
         this.loading.hide();
-        this.show_success_view(this.files.length);
+        this.show_success_view(this.files.length, 'zip');
         break;
       case 'folder':
         const path_to_folder = await window.electronAPI.compressFontsToFolder(this.files);
         this.loading.hide();
-        this.show_success_view(this.files.length);
+        this.show_success_view(this.files.length, 'folder');
         break;
       default:
         const response = await window.electronAPI.compressFonts(this.files);
         this.loading.hide();
-        this.show_success_view(this.files.length);
+        this.show_success_view(this.files.length, 'default');
         break;
     }
   }
@@ -135,10 +135,15 @@ class DropZone {
     this.$container.classList.remove('hidden');
   }
 
-  show_success_view(fonts_length) {
+  show_success_view(fonts_length, output_format = 'default') {
+    const message = {
+      default: `Successfully compressed ${fonts_length} font${fonts_length === 1 ? '' : 's'}`,
+      folder: `Successfully compressed ${fonts_length} font${fonts_length === 1 ? '' : 's'} and saved to folder`,
+      zip: `Successfully compressed ${fonts_length} font${fonts_length === 1 ? '' : 's'} and saved to zip file`
+    }
     this.$container.classList.add('hidden');
     this.$success.classList.remove('hidden');
-    this.$success_title.textContent = `Successfully compressed ${fonts_length} font${fonts_length === 1 ? '' : 's'}`;
+    this.$success_title.textContent = message[output_format];
   }
 }
 

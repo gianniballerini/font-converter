@@ -46,7 +46,7 @@ class MainApplication {
         document.fonts.add(fontFace);
       }
     }
-    Settings.font_names = font_names;
+    Settings.update('font_names', font_names);
   }
 
   normalize_font_name(font) {

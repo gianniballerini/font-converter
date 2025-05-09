@@ -33,7 +33,7 @@ class Preferences {
     }
 
     update_output_format(option) {
-        Settings.output_format = option;
+        Settings.update('output_format', option);
         for (let i = 0; i < this.$output_format_options.children.length; i++) {
             const option = this.$output_format_options.children[i];
             if (option.dataset.option !== option) {

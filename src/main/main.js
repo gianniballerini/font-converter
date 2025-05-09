@@ -100,11 +100,6 @@ app.whenReady().then(() => {
    * Handles compression of TTF and OTF fonts to WOFF2 format, zipping them, and saving the result
    */
   ipcMain.handle('compress-fonts-and-zip', async (event, filePaths) => {
-    const { filePath: outputDir } = await dialog.showSaveDialog({
-      defaultPath: 'converted-fonts.zip',
-      filters: [{ name: 'ZIP Archive', extensions: ['zip'] }]
-    });
-
     const convertedFiles = [];
     const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'converted-fonts-'));
     for (const filePath of filePaths) {
@@ -121,18 +116,6 @@ app.whenReady().then(() => {
         console.error(`Failed to compress font: ${filePath}`, err);
       }
     }
-
-    // const convertedFiles = await Promise.all(filePaths.map(async (filePath) => {
-    //   const fontBuffer = fs.readFileSync(filePath);
-    //   const compressedBuffer = await compress(fontBuffer);
-
-    //   const newFileName = path.basename(filePath, path.extname(filePath)) + '.woff2';
-    //   const newFilePath = path.join(outputDir, newFileName);
-    //   fs.writeFileSync(newFilePath, compressedBuffer);
-
-    //   return newFilePath;
-    // }));
-
     const zipPath = await zip_files(convertedFiles);
     fs.rmdirSync(tempDir, { recursive: true });
 
@@ -143,22 +126,30 @@ app.whenReady().then(() => {
    * Handles compression of TTF and OTF fonts to WOFF2 format, saving them in a specified output directory
    */
   ipcMain.handle('compress-fonts-to-folder', async (event, filePaths) => {
-    const { filePath: outputDir } = await dialog.showSaveDialog({
-      defaultPath: 'converted-fonts'
-    });
-
-    if (!outputDir) return;
+    const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'converted-fonts-'));
 
     await Promise.all(filePaths.map(async (filePath) => {
       const fontBuffer = fs.readFileSync(filePath);
       const compressedBuffer = await compress(fontBuffer);
 
       const newFileName = path.basename(filePath, path.extname(filePath)) + '.woff2';
-      const newFilePath = path.join(outputDir, newFileName);
+      const newFilePath = path.join(tempDir, newFileName);
       fs.writeFileSync(newFilePath, compressedBuffer);
     }));
 
-    return outputDir;
+    const { filePath: outputDir } = await dialog.showOpenDialog({
+      properties: ['openDirectory', 'createDirectory'],
+      buttonLabel: 'Select Output Folder',
+      defaultPath: 'converted-fonts'
+    });
+
+    if (outputDir) {
+      fs.cpSync(tempDir, outputDir, { recursive: true });
+    }
+
+    fs.rmdirSync(tempDir, { recursive: true });
+
+    return outputDir || null;
   });
 
 
