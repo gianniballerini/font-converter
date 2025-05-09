@@ -1,13 +1,52 @@
-$paletteA-0: #fffff8;
-$paletteA-1: #EDEDE9;
-$paletteA-2: #D6CCC2;
-$paletteA-3: #F5EBE0;
-$paletteA-4: #E3D5CA;
-$paletteA-5: #D5BDAF;
-$paletteA-6: #B19788;
 
-$paletteB-1: #DAD7CD;
-$paletteB-2: #A3B18A;
-$paletteB-3: #588157;
-$paletteB-4: #3A5A40;
-$paletteB-5: #344E41;
+// root or default
+:root, .theme-default {
+  // Default theme (Palette A)
+  --color-0: #fffff8;
+  --color-1: #EDEDE9;
+  --color-2: #D6CCC2;
+  --color-3: #F5EBE0;
+  --color-4: #E3D5CA;
+  --color-5: #D5BDAF;
+  --color-6: #B19788;
+}
+
+.theme-green {
+  --color-0: #F0F7ED;
+  --color-1: #DAD7CD;
+  --color-2: #A3B18A;
+  --color-3: #588157;
+  --color-4: #3A5A40;
+  --color-5: #344E41;
+  --color-6: #3A5A40;
+}
+
+.theme-olive {
+  --color-0: #F0F7ED;
+  --color-1: #E9F5DB;
+  --color-2: #CFE1B9;
+  --color-3: #B5C99A;
+  --color-4: #97A97C;
+  --color-5: #87986A;
+  --color-6: #718355;
+}
+
+.theme-marine {
+  --color-0: #F0F7ED;
+  --color-1: #D9ED92;
+  --color-2: #99D98C;
+  --color-3: #52B69A;
+  --color-4: #34A0A4;
+  --color-5: #1A759F;
+  --color-6: #184E77;
+}
+
+.theme-cherry {
+  --color-0: #f0cccc;
+  --color-1: #AD2831;
+  --color-2: #800E13;
+  --color-3: #800E13;
+  --color-4: #360608;
+  --color-5: #2f0d04;
+  --color-6: #250902;
+}

@@ -8,8 +8,8 @@
     border: 1 * $ptr solid transparent;
 
     &:hover {
-      border-left: 1 * $ptr solid $paletteA-0;
-      border-right: 1 * $ptr solid $paletteA-0;
+      border-left: 1 * $ptr solid var(--color-0);
+      border-right: 1 * $ptr solid var(--color-0);
     }
   }
 

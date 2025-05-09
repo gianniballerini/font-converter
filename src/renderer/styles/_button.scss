@@ -4,8 +4,8 @@
     width: 100%;
 
     &--primary {
-        color: $paletteA-0;
-        border: 1 * $ptr solid $paletteA-0;
+        color: var(--color-0);
+        border: 1 * $ptr solid var(--color-0);
         border-radius: 10 * $ptr;
         padding: 10 * $ptr;
         text-align: center;

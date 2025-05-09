@@ -25,8 +25,8 @@ body {
 }
 
 body {
-    background: $paletteA-5;
-    color: $paletteA-1;
+    background: var(--color-5);
+    color: var(--color-1);
     font-family: sans-serif;
   }
 

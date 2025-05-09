@@ -18,7 +18,7 @@
   column-gap: 10 * $ptr;
   align-items: center;
   justify-content: space-around;
-  border: 2 * $ptr solid $paletteA-3;
+  border: 2 * $ptr solid var(--color-3);
   padding: 10 * $ptr;
   height: 100%;
   width: 100%;
@@ -35,16 +35,16 @@
     border-radius: 10 * $ptr;
     transition: background 0.2s ease;
     &:hover {
-      background: $paletteA-1;
-      color: $paletteA-5;
+      background: var(--color-1);
+      color: var(--color-5);
     }
   }
 
   .dropzone__folder {
     transition: background 0.2s ease;
     &:hover {
-      background: $paletteA-1;
-      color: $paletteA-5;
+      background: var(--color-1);
+      color: var(--color-5);
     }
   }
 
@@ -59,11 +59,11 @@
     row-gap: 3 * $ptr;
     height: 100%;
     width: 100%;
-    border: 2 * $ptr solid $paletteA-3;
+    border: 2 * $ptr solid var(--color-3);
     border-radius: 10 * $ptr;
     padding: 2rem;
-    background: $paletteA-4;
-    color: $paletteA-6;
+    background: var(--color-4);
+    color: var(--color-6);
 
     overflow-y: auto;
     overflow-x: hidden;
@@ -73,7 +73,7 @@
     }
 
     &::-webkit-scrollbar-thumb {
-      background: $paletteA-3;
+      background: var(--color-3);
     }
   }
 

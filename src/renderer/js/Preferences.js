@@ -8,6 +8,7 @@ class Preferences {
 
         // Preferences items
         this.$output_format_options = document.querySelector('.preferences__output-format-options');
+        this.$theme_options = document.querySelector('.preferences__theme-options');
     }
 
     init() {
@@ -17,6 +18,14 @@ class Preferences {
         for (let i = 0; i < this.$output_format_options.children.length; i++) {
             const option = this.$output_format_options.children[i];
             option.addEventListener('click', this.update_output_format.bind(this, option.dataset.option));
+        }
+        this.$theme_options.querySelector(`[data-option="${Settings.theme}"]`).classList.add('selected');
+        for (let i = 0; i < this.$theme_options.children.length; i++) {
+            const option = this.$theme_options.children[i];
+            option.addEventListener('click', this.update_theme.bind(this, option.dataset.option));
+        }
+        if (Settings.theme) {
+            document.body.classList.add('theme-' + Settings.theme);
         }
     }
 
@@ -41,6 +50,20 @@ class Preferences {
             }
         }
         this.$output_format_options.querySelector(`[data-option="${option}"]`).classList.add('selected');
+    }
+
+    update_theme(option) {
+        if (Settings.theme)
+        document.body.classList.remove('theme-' + Settings.theme);
+        Settings.update('theme', option);
+        document.body.classList.add('theme-' + option);
+        for (let i = 0; i < this.$theme_options.children.length; i++) {
+            const option = this.$theme_options.children[i];
+            if (option.dataset.option !== option) {
+                option.classList.remove('selected');
+            }
+        }
+        this.$theme_options.querySelector(`[data-option="${option}"]`).classList.add('selected');
     }
 }
 
