@@ -1,9 +1,8 @@
 class Settings {
   constructor() {
-    this.settings = {
-      output_dir: null,
-      output_format: 'folder'
-    };
+    this.output_dir = null;
+    this.output_format = null;
+    this.font_names = [];
   }
 }
 

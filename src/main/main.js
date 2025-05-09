@@ -63,7 +63,7 @@ app.whenReady().then(() => {
   ipcMain.handle('dialog:openFiles', async () => {
     const result = await dialog.showOpenDialog({
       properties: ['openFile', 'multiSelections'],
-      filters: [{ name: 'Fonts', extensions: ['ttf'] }]
+      filters: [{ name: 'Fonts', extensions: ['ttf', 'otf'] }]
     });
     return result.filePaths;
   });
@@ -97,7 +97,7 @@ app.whenReady().then(() => {
   });
 
   /**
-   * Handles compression of TTF fonts to WOFF2 format, zipping them, and saving the result
+   * Handles compression of TTF and OTF fonts to WOFF2 format, zipping them, and saving the result
    */
   ipcMain.handle('compress-fonts-and-zip', async (event, filePaths) => {
     const { filePath: outputDir } = await dialog.showSaveDialog({
@@ -122,7 +122,7 @@ app.whenReady().then(() => {
   });
 
   /**
-   * Handles compression of TTF fonts to WOFF2 format, saving them in a specified output directory
+   * Handles compression of TTF and OTF fonts to WOFF2 format, saving them in a specified output directory
    */
   ipcMain.handle('compress-fonts-to-folder', async (event, filePaths) => {
     const { filePath: outputDir } = await dialog.showSaveDialog({
@@ -150,13 +150,14 @@ app.whenReady().then(() => {
   ipcMain.handle('compress-fonts', async (event, filePaths) => {
     const outputPaths = [];
 
-    for (const ttfPath of filePaths) {
+    for (const filePath of filePaths) {
       try {
-        const fontFile = fs.readFileSync(ttfPath);
+        const fontFile = fs.readFileSync(filePath);
         const compressed = await compress(fontFile);
 
-        const dir = path.dirname(ttfPath);
-        const baseName = path.basename(ttfPath, '.ttf');
+        const dir = path.dirname(filePath);
+        // Remove both .ttf and .otf extensions if they exist
+        const baseName = path.basename(filePath).replace(/\.(ttf|otf)$/, '');
 
         let outPath = path.join(dir, `${baseName}.woff2`);
         if (fs.existsSync(outPath)) {

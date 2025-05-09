@@ -13,5 +13,6 @@ contextBridge.exposeInMainWorld('electronAPI', {
     const buffer = fs.readFileSync(fontPath);
     const uint8Array = new Uint8Array(buffer);
     return uint8Array;
-  }
+  },
+  getLocalFonts: () => fs.readdirSync('public/fonts')
 });

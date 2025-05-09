@@ -1,0 +1,18 @@
+.success {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  row-gap: 20 * $ptr;
+}
+
+.success__title {
+  font-size: 20 * $ptr;
+  font-style: italic;
+}
+
+.success__button {
+  width: fit-content;
+}
