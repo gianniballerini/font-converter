@@ -109,12 +109,23 @@ class DropZone {
       case 'zip':
         const path_to_zip = await window.electronAPI.compressFontsAndZip(this.files, Settings.sanitize);
         this.loading.hide();
-        this.show_success_view(this.files.length, 'zip');
+        if (path_to_zip) {
+          this.show_success_view(this.files.length, 'zip');
+          window.electronAPI.openFontsFolder(path_to_zip);
+        }else {
+          this.$container.classList.remove('hidden');
+        }
         break;
       case 'folder':
         const path_to_folder = await window.electronAPI.compressFontsToFolder(this.files, Settings.sanitize);
         this.loading.hide();
-        this.show_success_view(this.files.length, 'folder');
+        if (path_to_folder) {
+          console.log(path_to_folder);
+          this.show_success_view(this.files.length, 'folder');
+          window.electronAPI.openFontsFolder(path_to_folder);
+        }else {
+          this.$container.classList.remove('hidden');
+        }
         break;
       default:
         const response = await window.electronAPI.compressFonts(this.files, Settings.sanitize);

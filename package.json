@@ -1,28 +1,56 @@
 {
   "name": "font-converter",
+  "description": "Font Converter Electron App",
   "version": "1.0.0",
-  "main": "src/main/main.js",
+  "main": "dist/main/main.js",
   "repository": "git@github.com:gianniballerini/font-converter.git",
   "author": "Gianni Ballerini <gianniballerini@gmail.com>",
   "license": "MIT",
   "dependencies": {
     "archiver": "^7.0.1",
-    "electron": "^36.1.0",
     "woff2-encoder": "^2.0.0"
   },
   "devDependencies": {
     "concurrently": "^9.1.2",
     "cross-env": "^7.0.3",
+    "electron": "^36.2.0",
+    "electron-builder": "^26.0.12",
     "pug": "^3.0.3",
     "sass": "^1.87.0",
     "vite": "^6.3.4",
     "vite-plugin-pug-transformer": "^1.0.5",
     "wait-on": "^8.0.3"
   },
+  "build": {
+    "appId": "com.gianniballerini.fontconverter",
+    "productName": "FontConverter",
+    "files": [
+      "dist/main/**/*",
+      "dist/preload/**/*",
+      "dist/renderer/**/*",
+      "dist/renderer/fonts/**/*",
+      "node_modules/**/*",
+      "package.json"
+    ],
+    "directories": {
+      "buildResources": "build"
+    },
+    "mac": {
+      "target": [
+        "dmg",
+        "zip"
+      ],
+      "category": "public.app-category.utilities"
+    }
+  },
   "scripts": {
-    "dev": "concurrently -k \"vite\" \"wait-on http://localhost:1234 && cross-env VITE_DEV_SERVER_URL=http://localhost:1234 electron .\"",
-    "build": "vite build",
+    "dev": "concurrently -k \"cross-env NODE_ENV=development vite\" \"wait-on http://localhost:1234 && cross-env NODE_ENV=development electron .\"",
     "start-vite": "vite --host --port 1234",
-    "start": "electron ."
+    "start": "electron .",
+    "build:main": "esbuild src/main/main.js --bundle --platform=node --outdir=dist/main --external:electron --external:archiver --external:woff2-encoder",
+    "build:preload": "esbuild src/preload/preload.js --bundle --platform=node --outdir=dist/preload --external:electron",
+    "build:renderer": "vite build",
+    "build": "yarn build:main && yarn build:preload && yarn build:renderer",
+    "dist": "yarn build && electron-builder"
   }
 }

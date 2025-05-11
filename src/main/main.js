@@ -1,10 +1,7 @@
 // src/main/main.js
-const { app, BrowserWindow, dialog, ipcMain } = require('electron');
+const { app, BrowserWindow, dialog, ipcMain, shell } = require('electron');
 const path = require('path');
 const fs = require('fs');
-const { compress } = require('woff2-encoder');
-const archiver = require('archiver');
-const os = require('os');
 
 const { FontHandler } = require('./FontHandler');
 
@@ -23,10 +20,10 @@ function createWindow() {
   });
 
   // Load renderer output from dev server or file
-  if (process.env.VITE_DEV_SERVER_URL) {
-    win.loadURL(process.env.VITE_DEV_SERVER_URL);
+  if (process.env.NODE_ENV === 'development') {
+    win.loadURL('http://localhost:1234');
   } else {
-    win.loadFile(path.join(__dirname, '../renderer/index.html'));
+    win.loadFile(path.resolve(__dirname, '../renderer/index.html'));
   }
 }
 
@@ -93,5 +90,9 @@ app.whenReady().then(() => {
   ipcMain.handle('compress-fonts-and-zip', fontHandler.compress_and_zip.bind(fontHandler));
 
   ipcMain.handle('compress-fonts-to-folder', fontHandler.compress_fonts_to_folder.bind(fontHandler));
+
+  ipcMain.on('open-folder', (event, path) => {
+    shell.openPath(path);
+  });
 
 });

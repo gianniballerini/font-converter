@@ -21,6 +21,7 @@ class MainApplication {
     this.load_app_fonts();
     this.render_loop.start();
     this.preferences.init();
+    this.settings = Settings;
   }
 
   handle_github_link_click() {
@@ -42,7 +43,7 @@ class MainApplication {
       const font_name = this.normalize_font_name(font);
       if (font.endsWith('.woff2') && !font_names.includes(font_name)) {
         font_names.push(font_name);
-        const fontFace = new FontFace(font_name, `url(/fonts/${font})`);
+        const fontFace = new FontFace(font_name, `url(fonts/${font})`);
         document.fonts.add(fontFace);
       }
     }
