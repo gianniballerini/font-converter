@@ -42,13 +42,7 @@ This will start both the Vite development server and the Electron application.
 To build the application for production:
 
 ```bash
-yarn build
-```
-
-To create distributable packages:
-
-```bash
-yarn dist
+rm -rf dist && yarn build && yarn dist
 ```
 
 This will create platform-specific packages in the `dist` directory.
