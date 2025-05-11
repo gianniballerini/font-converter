@@ -56,7 +56,6 @@ font-converter/
 │   ├── renderer/     # Renderer process code
 │   └── preload/      # Preload scripts
 ├── public/           # Static assets
-├── build/           # Build resources
 └── dist/            # Distribution files
 ```
 
