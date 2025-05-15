@@ -45,9 +45,7 @@
     }
   },
   "scripts": {
-    "dev": "concurrently -k \"cross-env NODE_ENV=development vite\" \"wait-on http://localhost:1234 && cross-env NODE_ENV=development electron .\"",
-    "start-vite": "vite --host --port 1234",
-    "start": "electron .",
+    "start": "node tasks/start_app.mjs",
     "build:main": "esbuild src/main/main.js --bundle --platform=node --outdir=dist/main --external:electron --external:archiver --external:woff2-encoder",
     "build:preload": "esbuild src/preload/preload.js --bundle --platform=node --outdir=dist/preload --external:electron",
     "build:renderer": "vite build",

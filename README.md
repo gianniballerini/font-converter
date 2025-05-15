@@ -32,7 +32,7 @@ yarn install
 To run the application in development mode:
 
 ```bash
-yarn dev
+yarn start
 ```
 
 This will start both the Vite development server and the Electron application.
@@ -71,11 +71,9 @@ font-converter/
 
 ## Scripts
 
-- `yarn dev` - Start development server
+- `yarn start` - Start development server
 - `yarn build` - Build the application
 - `yarn dist` - Create distributable packages
-- `yarn start` - Start the Electron application
-- `yarn start-vite` - Start Vite development server
 
 ## License
 
