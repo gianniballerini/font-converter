@@ -2,6 +2,8 @@
 
 A desktop application built with Electron that allows users to convert fonts between different formats. This tool provides a user-friendly interface for font conversion tasks.
 
+![](https://github.com/gianniballerini/font-converter/blob/main/public/icon.png?raw=true)
+
 ## Features
 
 - Convert fonts between different formats
